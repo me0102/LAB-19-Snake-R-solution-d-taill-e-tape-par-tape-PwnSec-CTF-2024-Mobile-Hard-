@@ -44,7 +44,7 @@ L'APK est installé sur un émulateur rooté (ou un appareil rooté) via ADB :
 ```powershell
 adb install snake.apk
 ```
-<img width="768" height="138" alt="image" src="https://github.com/user-attachments/assets/7a8710bc-2c11-4a40-a3de-46c13f644daa" />
+<img width="736" height="132" alt="Capture d&#39;écran 2026-06-06 214556" src="https://github.com/user-attachments/assets/acb1cc1b-7735-44a2-80e4-7b8d5285493a" />
 
 ```
 Performing Streamed Install
@@ -60,7 +60,9 @@ Success
 La décompilation via **jadx** permet d'examiner le code Java reconstitué.
 
 ### Méthode `onCreate()` — Point d'entrée de l'activité principale
-<img width="699" height="169" alt="image" src="https://github.com/user-attachments/assets/738f5012-877c-45ed-bdef-e8de9223efc7" />
+
+<img width="1101" height="257" alt="Capture d&#39;écran 2026-06-06 214430" src="https://github.com/user-attachments/assets/d566fa01-d19f-4b10-b080-a8e4e72706b7" />
+
 
 ```java
 @Override
@@ -93,7 +95,8 @@ String[] strArr = {"android.permission.READ_EXTERNAL_STORAGE"};
 L'app réclame un accès au stockage externe — ce qui suggère qu'elle consomme des données depuis un fichier externe, potentiellement un fichier YAML.
 
 ---
-<img width="1360" height="258" alt="image" src="https://github.com/user-attachments/assets/731807d3-6b43-483a-a934-d6bc8b141f16" />
+<img width="1609" height="303" alt="Capture d&#39;écran 2026-06-06 214438" src="https://github.com/user-attachments/assets/9e317935-0fd0-47cc-96b8-a0d7265ba45e" />
+
 
 
 ## ⚙️ Étape 3 — Extraction du bytecode smali avec Apktool
@@ -103,8 +106,7 @@ Pour modifier le binaire, on extrait le **code smali** (bytecode Dalvik sous for
 ```powershell
 apktool d snake.apk -o snake_smali
 ```
-<img width="1162" height="436" alt="image" src="https://github.com/user-attachments/assets/c4628d4d-4201-4de4-8ab0-6208439d9d58" />
-
+<img width="1011" height="354" alt="Capture d&#39;écran 2026-06-06 214623" src="https://github.com/user-attachments/assets/95c33334-96f9-49dc-8463-7a225761e898" />
 
 ```
 I: Using Apktool 3.0.2 on snake.apk with 4 threads
@@ -155,7 +157,7 @@ On ouvre `MainActivity.smali` et on repère la méthode `isDeviceRooted` :
     return p0
 .end method
 ```
-<img width="907" height="699" alt="image" src="https://github.com/user-attachments/assets/5c1fef58-c9f1-4bab-9afb-01e473256c42" />
+<img width="906" height="690" alt="Capture d&#39;écran 2026-06-06 214506" src="https://github.com/user-attachments/assets/bff7a150-5902-4ff4-bab8-fdf0593327df" />
 
 **Principe :** Le corps entier de la méthode est remplacé par `const/4 p0, 0x0` (équivalent à `false`) puis `return p0`. Quelle que soit la configuration de l'appareil, l'application considérera désormais qu'il n'est jamais rooté.
 
@@ -179,7 +181,9 @@ I: Built apk into: snake_patched.apk
 ```
 
 ✅ Le fichier `snake_patched.apk` est généré avec succès.
-<img width="1105" height="295" alt="image" src="https://github.com/user-attachments/assets/7a068b6b-2ec3-4358-9853-49400ff0f0d2" />
+
+<img width="954" height="235" alt="Capture d&#39;écran 2026-06-06 214637" src="https://github.com/user-attachments/assets/e80c4a45-4b1c-434e-beb7-158ec332f407" />
+
 
 ---
 
@@ -211,7 +215,8 @@ Mode       LastWriteTime   Length  Name
 ----       -------------   ------  ----
 -a----     06/06/2026      14:58   5920949  snake_signed.apk
 ```
-<img width="1600" height="438" alt="image" src="https://github.com/user-attachments/assets/c29e9b8d-c920-4bd6-a82c-49d74a0ee5ec" />
+<img width="1001" height="275" alt="Capture d&#39;écran 2026-06-06 214646" src="https://github.com/user-attachments/assets/b283ba4c-8e94-4b5a-b9d1-b5711fb3342d" />
+
 
 
 ### Contrôle de la signature
@@ -224,7 +229,8 @@ echo $?
 ```
 True
 ```
-<img width="1600" height="159" alt="image" src="https://github.com/user-attachments/assets/47fcb481-0a47-4ffa-be69-bebfd0839a92" />
+<img width="977" height="89" alt="Capture d&#39;écran 2026-06-06 214653" src="https://github.com/user-attachments/assets/7d32a987-92a2-4f96-8dfb-d5dc16b1a952" />
+
 
 ✅ La signature est conforme.
 
@@ -242,7 +248,8 @@ Success
 ```
 
 L'application démarre désormais normalement, même sur un émulateur rooté. Le bypass anti-root est effectif.
-<img width="894" height="124" alt="image" src="https://github.com/user-attachments/assets/de0fb779-507f-43f5-a5dd-6ac6454e82dc" />
+
+<img width="894" height="114" alt="Capture d&#39;écran 2026-06-06 214659" src="https://github.com/user-attachments/assets/2ee79cb5-aeb5-4869-bb20-bad7967aa0f3" />
 
 ---
 
@@ -278,7 +285,7 @@ Get-Content "$env:USERPROFILE\Desktop\snake\snake\Skull_Face.yml"
 ```
 !!com.pwnsec.snake.BigBoss ["Snaaaaaaaaaaaaake"]
 ```
-<img width="1387" height="304" alt="image" src="https://github.com/user-attachments/assets/94ef4e25-5f83-4071-9ce7-be69937d23e7" />
+<img width="1004" height="218" alt="Capture d&#39;écran 2026-06-06 214707" src="https://github.com/user-attachments/assets/03c9d564-a999-4b01-a3a4-e1d1573c164c" />
 
 ### Fonctionnement du payload
 
